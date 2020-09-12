@@ -1,0 +1,39 @@
+﻿@model DigitalLibrary.Models.Client
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <h3>Books that this client holds:</h3>
+    <ul>
+        @foreach (var book in Model.Books)
+        {
+            <li>
+                <a href="/Books/Details/@book.Id">"@book.Title" by @book.Author</a>
+                @Html.ActionLink("Remove book from client", "RemoveFromBook", "Books", new { bookId = book.Id, clientId = Model.Id }, new { })
+            </li>
+        }
+    </ul>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

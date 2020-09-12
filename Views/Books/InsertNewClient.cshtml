@@ -1,0 +1,21 @@
+﻿@model DigitalLibrary.Models.ClientBook
+
+@{
+    ViewBag.Title = "InsertNewClient";
+}
+
+<h2>Insert new client for "@Model.Book.Title"</h2>
+
+@using (Html.BeginForm("InsertNewClient", "Books"))
+{
+    <div class="form-group">
+        @Html.DropDownListFor(m=>m.ClientId, 
+            new SelectList(Model.Clients, "Id", "FullName"), 
+            new { @class = "form-control" })
+        @Html.HiddenFor(m=>m.BookId)
+    </div>
+
+    <div class="form-group">
+        <button type="submit">Add client to Book</button>
+    </div>
+}

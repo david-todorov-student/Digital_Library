@@ -1,0 +1,67 @@
+﻿@model DigitalLibrary.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+
+        <dd>
+            <a href="@Model.Url">Download link</a>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.numOfCopies)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.numOfCopiesLeft)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <h3>Clients that hold this book:</h3>
+    <ul>
+        @foreach (var client in Model.Clients)
+        {
+            <li>
+                <a href="/Clients/Details/@client.Id">@client.FullName</a>
+                @Html.ActionLink("Remove client from book", "RemoveFromBook", "Books", new { bookId = Model.Id, clientId = client.Id }, new { });
+            </li>
+        }
+    </ul>
+</div>
+
+@Html.ActionLink("Insert client to book", "InsertNewClient", "Books", new { id = Model.Id }, new { })
+<br />
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
