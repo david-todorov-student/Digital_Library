@@ -15,12 +15,14 @@ namespace DigitalLibrary.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Books
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(db.Books.ToList());
         }
 
         // GET: Books/Details/5
+        [Authorize(Roles = "Administrator , Editor")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace DigitalLibrary.Controllers
         }
 
         // GET: Books/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -63,6 +66,7 @@ namespace DigitalLibrary.Controllers
         }
 
         // GET: Books/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -98,6 +102,7 @@ namespace DigitalLibrary.Controllers
             return View(book);
         }
 
+        [Authorize(Roles = "Editor , Administrator")]
         public ActionResult InsertNewClient(int id)
         {
             ClientBook model = new ClientBook();
@@ -125,6 +130,7 @@ namespace DigitalLibrary.Controllers
             return View("Index", db.Books.ToList());
         }
 
+        [Authorize(Roles = "Editor , Administrator")]
         public ActionResult RemoveFromBook(int bookId, int clientId)
         {
             ClientBook clientBook = new ClientBook();
@@ -150,6 +156,7 @@ namespace DigitalLibrary.Controllers
         }
 
         // GET: Books/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int id)
         {
             Book book = db.Books.Find(id);

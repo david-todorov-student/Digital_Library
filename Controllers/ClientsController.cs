@@ -10,17 +10,20 @@ using DigitalLibrary.Models;
 
 namespace DigitalLibrary.Controllers
 {
+    
     public class ClientsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Clients
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(db.Clients.ToList());
         }
 
         // GET: Clients/Details/5
+        [Authorize(Roles = "Administrator , Editor")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +39,7 @@ namespace DigitalLibrary.Controllers
         }
 
         // GET: Clients/Create
+        [Authorize(Roles = "Editor , Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -59,6 +63,7 @@ namespace DigitalLibrary.Controllers
         }
 
         // GET: Clients/Edit/5
+        [Authorize(Roles ="Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +95,7 @@ namespace DigitalLibrary.Controllers
         }
 
         // GET: Clients/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

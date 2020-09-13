@@ -3,20 +3,28 @@
 @{
     ViewBag.Title = "RemoveFromBook";
 }
+<style type="text/css">
+    body {
+        background-color: #F7F1F0;
+    }
+</style>
+<body>
 
-<h2>Removing client</h2>
+    <h2>Removing client</h2>
 
-<p>Are you sure you want to remove client @Model.Client.FullName from book "@Model.Book.Title"?</p><br/>
+    <p>Are you sure you want to remove client @Model.Client.FullName from book "@Model.Book.Title"?</p>
+    <br />
 
-@using (Html.BeginForm("RemoveFromBook", "Books"))
-{
-    <div class="form-group">
-        @Html.HiddenFor(m=>m.ClientId)
-        @Html.HiddenFor(m=>m.BookId)
-    </div>
-    <div class="form-group">
-        <button type="submit">Yes, continue</button>
-    </div>
-}
+    @using (Html.BeginForm("RemoveFromBook", "Books"))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(m => m.ClientId)
+            @Html.HiddenFor(m => m.BookId)
+        </div>
+        <div class="form-group">
+            <button type="submit">Yes, continue</button>
+        </div>
+    }
 
-@Html.ActionLink("No, go back", "Index", "Books");
+    @Html.ActionLink("No, go back", "Index", "Books");
+</body>
