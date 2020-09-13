@@ -11,9 +11,12 @@
 <body>
     <h2>Books</h2>
     <br />
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+    @if (User.IsInRole("Administrator"))
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
     <br />
     <table class="table" id="booksTable">
         <thead>
